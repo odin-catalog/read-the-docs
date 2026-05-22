@@ -677,15 +677,22 @@
       transition: color 0.15s, border-color 0.15s;
     }
 
-    .erd-tab:hover { color: var(--text); }
+    .erd-tab:hover {
+      color: var(--text);
+    }
 
     .erd-tab.active {
       color: var(--accent);
       border-bottom-color: var(--accent);
     }
 
-    .erd-panel { display: none; }
-    .erd-panel.active { display: block; }
+    .erd-panel {
+      display: none;
+    }
+
+    .erd-panel.active {
+      display: block;
+    }
 
     .erd-wrapper {
       border: 1px solid var(--border);
@@ -733,7 +740,11 @@
       transition: background 0.15s, color 0.15s;
     }
 
-    .erd-zoom-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .erd-zoom-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
 
     .erd-container {
       height: 560px;
@@ -743,7 +754,9 @@
       background: #ffffff;
     }
 
-    .erd-container:active { cursor: grabbing; }
+    .erd-container:active {
+      cursor: grabbing;
+    }
 
     .erd-container svg {
       display: block;
@@ -792,8 +805,9 @@
       backdrop-filter: blur(4px);
     }
 
-    .erd-fs-backdrop.active { display: block; }
-
+    .erd-fs-backdrop.active {
+      display: block;
+    }
   </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-EEDBNWYEYK"></script>
@@ -834,7 +848,7 @@
 
     <div class="topbar-right">
       <a href="https://www.odin-catalog.com">Marketing</a>
-      <a href="https://github.com/odin-catalog">GitHub</a>
+      <a href="https://github.com/ODIN-Data-Intelligence">GitHub</a>
     </div>
   </header>
 
@@ -1019,7 +1033,7 @@
         <div class="code-block">
           <div class="code-header"><span>bash</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>
           </div>
-          <pre><code class="language-bash">git clone https://github.com/odin-catalog/odin.git
+          <pre><code class="language-bash">git clone https://github.com/ODIN-Data-Intelligence/odin.git
 cd odin
 cp .env.example .env          # review and edit credentials</code></pre>
         </div>
@@ -1296,32 +1310,39 @@ docker compose --profile ai up -d</code></pre>
           <div class="erd-toolbar">
             <span class="erd-db-label">Deployment topology</span>
             <div class="erd-zoom-controls">
-              <button class="erd-zoom-btn" title="Zoom in"  onclick="erdZoom('topo','in')">+</button>
-              <button class="erd-zoom-btn" title="Reset"    onclick="erdZoom('topo','reset')">⊙</button>
+              <button class="erd-zoom-btn" title="Zoom in" onclick="erdZoom('topo','in')">+</button>
+              <button class="erd-zoom-btn" title="Reset" onclick="erdZoom('topo','reset')">⊙</button>
               <button class="erd-zoom-btn" title="Zoom out" onclick="erdZoom('topo','out')">−</button>
-              <button class="erd-zoom-btn erd-fs-btn" title="Full screen" onclick="erdFullscreen('topo')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+              <button class="erd-zoom-btn erd-fs-btn" title="Full screen" onclick="erdFullscreen('topo')"><svg
+                  width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round">
+                  <polyline points="15 3 21 3 21 9" />
+                  <polyline points="9 21 3 21 3 15" />
+                  <line x1="21" y1="3" x2="14" y2="10" />
+                  <line x1="3" y1="21" x2="10" y2="14" />
+                </svg></button>
             </div>
           </div>
           <div class="erd-container" id="erd-container-topo" style="height:480px">
             <div class="mermaid" id="mermaid-src-topo">
-flowchart TD
-    CLI["Browser / CLI"]
-    TRF["Traefik :80/443"]
-    CF["consumer-frontend\nnginx :3001"]
-    PF["producer-frontend\nnginx :3000"]
-    CLI --> TRF
-    TRF -->|"catalog.local/"| CF
-    TRF -->|"manage.catalog.local/"| PF
-    TRF -->|"api.catalog.local/"| APIS
-    subgraph APIS["API Services"]
-        INV["inventory-service :8001\nPostgreSQL :5433"]
-        HVT["harvest-service :8002\nPostgreSQL :5434 · MinIO :9000"]
-        LIN["lineage-service :8003\nPostgreSQL+AGE :5435"]
-        SRC["search-service :8004\nOpenSearch :9200"]
-        AIS["ai-service :8005\nPostgreSQL+pgvector :5437"]
-        IDS["identity-service :8006\nPostgreSQL :5436 · Keycloak :8180"]
-    end
-    APIS <-->|events| KFK["Apache Kafka :9092\nKRaft · no ZooKeeper"]
+              flowchart TD
+              CLI["Browser / CLI"]
+              TRF["Traefik :80/443"]
+              CF["consumer-frontend\nnginx :3001"]
+              PF["producer-frontend\nnginx :3000"]
+              CLI --> TRF
+              TRF -->|"catalog.local/"| CF
+              TRF -->|"manage.catalog.local/"| PF
+              TRF -->|"api.catalog.local/"| APIS
+              subgraph APIS["API Services"]
+              INV["inventory-service :8001\nPostgreSQL :5433"]
+              HVT["harvest-service :8002\nPostgreSQL :5434 · MinIO :9000"]
+              LIN["lineage-service :8003\nPostgreSQL+AGE :5435"]
+              SRC["search-service :8004\nOpenSearch :9200"]
+              AIS["ai-service :8005\nPostgreSQL+pgvector :5437"]
+              IDS["identity-service :8006\nPostgreSQL :5436 · Keycloak :8180"]
+              end
+              APIS <-->|events| KFK["Apache Kafka :9092\nKRaft · no ZooKeeper"]
             </div>
           </div>
         </div>
@@ -1546,32 +1567,39 @@ flowchart TD
           <div class="erd-toolbar">
             <span class="erd-db-label">Three-tier metamodel</span>
             <div class="erd-zoom-controls">
-              <button class="erd-zoom-btn" title="Zoom in"  onclick="erdZoom('meta','in')">+</button>
-              <button class="erd-zoom-btn" title="Reset"    onclick="erdZoom('meta','reset')">⊙</button>
+              <button class="erd-zoom-btn" title="Zoom in" onclick="erdZoom('meta','in')">+</button>
+              <button class="erd-zoom-btn" title="Reset" onclick="erdZoom('meta','reset')">⊙</button>
               <button class="erd-zoom-btn" title="Zoom out" onclick="erdZoom('meta','out')">−</button>
-              <button class="erd-zoom-btn erd-fs-btn" title="Full screen" onclick="erdFullscreen('meta')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+              <button class="erd-zoom-btn erd-fs-btn" title="Full screen" onclick="erdFullscreen('meta')"><svg
+                  width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round">
+                  <polyline points="15 3 21 3 21 9" />
+                  <polyline points="9 21 3 21 3 15" />
+                  <line x1="21" y1="3" x2="14" y2="10" />
+                  <line x1="3" y1="21" x2="10" y2="14" />
+                </svg></button>
             </div>
           </div>
           <div class="erd-container" id="erd-container-meta" style="height:460px">
             <div class="mermaid" id="mermaid-src-meta">
-flowchart TB
-    subgraph CONC["Conceptual · DPROD"]
-        DP["DataProduct"] --> IP["InputPort"]
-        DP --> OP["OutputPort"] --> SVC["DataService"]
-    end
-    subgraph LOGIC["Logical · DCAT"]
-        D["Dataset"] --> VP["VocabularyProfile"] --> VOC["Vocabulary\nFIBO · schema.org"]
-        D --> LM["LogicalModel"] --> LDE["LogicalDataElement"] --> VM["VocabularyMapping · SKOS"]
-    end
-    subgraph PHYS["Physical · DCAT · CSV-W"]
-        DIST["Distribution"] --> CT["CSVWTable"] --> CS["CSVWSchema"] --> CC["CSVWColumn"]
-    end
-    subgraph LINE["Lineage · OpenLineage · AGE"]
-        JOB["OpenLineage Job"] -->|"READS_FROM · WRITES_TO"| LD["Dataset"]
-    end
-    SVC --> DIST
-    CC -->|"logicalDataElementId FK"| LDE
-    LD -. "catalogResourceId" .-> D
+              flowchart TB
+              subgraph CONC["Conceptual · DPROD"]
+              DP["DataProduct"] --> IP["InputPort"]
+              DP --> OP["OutputPort"] --> SVC["DataService"]
+              end
+              subgraph LOGIC["Logical · DCAT"]
+              D["Dataset"] --> VP["VocabularyProfile"] --> VOC["Vocabulary\nFIBO · schema.org"]
+              D --> LM["LogicalModel"] --> LDE["LogicalDataElement"] --> VM["VocabularyMapping · SKOS"]
+              end
+              subgraph PHYS["Physical · DCAT · CSV-W"]
+              DIST["Distribution"] --> CT["CSVWTable"] --> CS["CSVWSchema"] --> CC["CSVWColumn"]
+              end
+              subgraph LINE["Lineage · OpenLineage · AGE"]
+              JOB["OpenLineage Job"] -->|"READS_FROM · WRITES_TO"| LD["Dataset"]
+              end
+              SVC --> DIST
+              CC -->|"logicalDataElementId FK"| LDE
+              LD -. "catalogResourceId" .-> D
             </div>
           </div>
         </div>
@@ -1851,7 +1879,8 @@ curl http://localhost:8001/api/v1/catalogs/{id}/export \
           <tr>
             <td><code>physicalColumnIds</code></td>
             <td>UUID[]</td>
-            <td>IDs of bound <code>csvw_columns</code> rows; the FK lives on the column side (<code>csvw_columns.logicalDataElementId</code>)</td>
+            <td>IDs of bound <code>csvw_columns</code> rows; the FK lives on the column side
+              (<code>csvw_columns.logicalDataElementId</code>)</td>
           </tr>
           <tr>
             <td><code>isIdentifier</code></td>
@@ -1881,7 +1910,8 @@ curl http://localhost:8001/api/v1/catalogs/{id}/export \
           generates a <em>draft</em> LogicalModel with one <code>LogicalDataElement</code> per <code>CSVWColumn</code>.
           Each harvested column has its <code>logicalDataElementId</code> set to the newly created element, and its
           <code>logicalType</code> is inferred from the source datatype. You can then enrich the draft with business
-          names and vocabulary mappings.</p>
+          names and vocabulary mappings.
+        </p>
 
         <div class="page-nav">
           <a class="page-nav-btn" onclick="show('model-csvw')">
@@ -2017,7 +2047,8 @@ curl http://localhost:8001/api/v1/catalogs/{id}/export \
           <em>"settlement amount"</em> returns every table that mentions the word "amount." A SKOS
           <code>exactMatch</code> binding to
           <code>fibo-fnd-acc-cur:MonetaryAmount</code> makes retrieval precise — the model finds the right
-          element, not the most popular one.</p>
+          element, not the most popular one.
+        </p>
         <p>Vocabulary mappings give the search layer a signal that survives synonym drift, column renaming,
           and schema evolution. The concept IRI is stable even when the column name is not.</p>
 
@@ -2025,7 +2056,8 @@ curl http://localhost:8001/api/v1/catalogs/{id}/export \
         <p>schema.org and FIBO IRIs appear extensively in the training corpora of every major LLM.
           Annotating a data element with <code>https://schema.org/price</code> or
           <code>fibo-md-temx-ex:MarketPrice</code> puts it in semantic proximity to everything the model
-          already knows about that concept — zero prompt engineering required.</p>
+          already knows about that concept — zero prompt engineering required.
+        </p>
         <p>The model does not need to be told what a <code>LegalEntityIdentifier</code> is. It learned
           from the FIBO specification itself. Your vocabulary mapping surfaces that latent knowledge at
           query time.</p>
@@ -2045,7 +2077,8 @@ curl http://localhost:8001/api/v1/catalogs/{id}/export \
         <p>ODIN's vocabulary mappings, logical models, and lineage edges form a traversable knowledge
           graph stored in Apache AGE. AI agents don't just search it — they walk it.</p>
         <div class="code-block">
-          <div class="code-header"><span>Cypher (Apache AGE)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-header"><span>Cypher (Apache AGE)</span><button class="copy-btn"
+              onclick="copyCode(this)">Copy</button></div>
           <pre><code class="language-cypher">-- Walk from a regulatory report upstream through lineage,
 -- then sideways through vocabulary to equivalent columns in other datasets
 MATCH (report:Dataset {name: 'RISK_AGGREGATION'})
@@ -2061,29 +2094,53 @@ RETURN src.namespace, src.name, src.fibo_concepts</code></pre>
           financial data with regulatory intent. When an AI model encounters a FIBO-annotated dataset, it
           has access to the same ontological structure that regulators, risk managers, and auditors use.</p>
         <table>
-          <tr><th>FIBO concept IRI (abbreviated)</th><th>Meaning</th></tr>
-          <tr><td><code>fibo-fnd-acc-cur:MonetaryAmount</code></td><td>Monetary value with attached currency</td></tr>
-          <tr><td><code>fibo-fnd-acc-cur:Currency</code></td><td>ISO 4217 currency code</td></tr>
-          <tr><td><code>fibo-fbc-fi-fi:FinancialInstrument</code></td><td>General financial instrument</td></tr>
-          <tr><td><code>fibo-fbc-fct-rga:LegalEntityIdentifier</code></td><td>LEI — unique legal entity identifier</td></tr>
-          <tr><td><code>fibo-md-temx-ex:MarketPrice</code></td><td>Exchange-quoted market price</td></tr>
-          <tr><td><code>fibo-sec-eq-eq:Share</code></td><td>Equity share / stock</td></tr>
+          <tr>
+            <th>FIBO concept IRI (abbreviated)</th>
+            <th>Meaning</th>
+          </tr>
+          <tr>
+            <td><code>fibo-fnd-acc-cur:MonetaryAmount</code></td>
+            <td>Monetary value with attached currency</td>
+          </tr>
+          <tr>
+            <td><code>fibo-fnd-acc-cur:Currency</code></td>
+            <td>ISO 4217 currency code</td>
+          </tr>
+          <tr>
+            <td><code>fibo-fbc-fi-fi:FinancialInstrument</code></td>
+            <td>General financial instrument</td>
+          </tr>
+          <tr>
+            <td><code>fibo-fbc-fct-rga:LegalEntityIdentifier</code></td>
+            <td>LEI — unique legal entity identifier</td>
+          </tr>
+          <tr>
+            <td><code>fibo-md-temx-ex:MarketPrice</code></td>
+            <td>Exchange-quoted market price</td>
+          </tr>
+          <tr>
+            <td><code>fibo-sec-eq-eq:Share</code></td>
+            <td>Equity share / stock</td>
+          </tr>
         </table>
 
         <h2>Cross-system equivalence without ETL</h2>
         <p>Different source systems use different column names for the same concept:
           <code>trade_ccy</code>, <code>SETTL_CURR</code>, <code>SettlementCurrency</code>. All three
           mapped to <code>fibo-fnd-acc-cur:Currency</code> with <code>exactMatch</code> become
-          interchangeable to any AI agent — without moving a byte of data.</p>
+          interchangeable to any AI agent — without moving a byte of data.
+        </p>
         <div class="code-block">
-          <div class="code-header"><span>bash</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-header"><span>bash</span><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
           <pre><code class="language-bash"># Find all datasets with a column mapped to fibo Currency concept
 curl "http://localhost:8004/api/v1/search?fibo_concept=fibo-fnd-acc-cur%3ACurrency" \
   -H "X-API-Key: dev-local"</code></pre>
         </div>
         <p>Semantic equivalence is free once vocabulary mappings exist. The search index stores
           <code>fibo_concepts</code> as a keyword facet — no text matching, no NLP, just exact IRI lookup
-          across every dataset in the catalog.</p>
+          across every dataset in the catalog.
+        </p>
 
         <div class="page-nav">
           <a class="page-nav-btn" onclick="show('model-vocab')">
@@ -2177,236 +2234,245 @@ curl "http://localhost:8003/api/v1/datasets/TRADING_DB.BLOTTER/TRADE_BLOTTER/imp
             <div class="erd-toolbar">
               <span class="erd-db-label">inventory-service · PostgreSQL 16</span>
               <div class="erd-zoom-controls">
-                <button class="erd-zoom-btn" title="Zoom in"  onclick="erdZoom('inv','in')">+</button>
-                <button class="erd-zoom-btn" title="Reset"    onclick="erdZoom('inv','reset')">⊙</button>
+                <button class="erd-zoom-btn" title="Zoom in" onclick="erdZoom('inv','in')">+</button>
+                <button class="erd-zoom-btn" title="Reset" onclick="erdZoom('inv','reset')">⊙</button>
                 <button class="erd-zoom-btn" title="Zoom out" onclick="erdZoom('inv','out')">−</button>
-                <button class="erd-zoom-btn erd-fs-btn" title="Full screen" onclick="erdFullscreen('inv')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+                <button class="erd-zoom-btn erd-fs-btn" title="Full screen" onclick="erdFullscreen('inv')"><svg
+                    width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round">
+                    <polyline points="15 3 21 3 21 9" />
+                    <polyline points="9 21 3 21 3 15" />
+                    <line x1="21" y1="3" x2="14" y2="10" />
+                    <line x1="3" y1="21" x2="10" y2="14" />
+                  </svg></button>
               </div>
             </div>
             <div class="erd-container" id="erd-container-inv">
               <div class="mermaid" id="erd-src-inv">
-erDiagram
-    resources {
-        uuid        id              PK
-        varchar     resource_type
-        text        iri             UK
-        uuid        tenant_id
-        uuid        domain_id
-        text        title
-        text        description
-        timestamptz issued
-        timestamptz modified
-        text_arr    language
-        text_arr    keywords
-        text_arr    themes
-        text        license
-        text        rights_statement
-        text        access_rights
-        text_arr    conforms_to
-        uuid        creator_id
-        uuid        publisher_id
-        jsonb       contact_points
-        text        source_uri
-        jsonb       extra
-        boolean     is_deleted
-        timestamptz created_at
-        timestamptz updated_at
-    }
-    catalogs {
-        uuid     resource_id     PK
-        text     homepage
-        uuid_arr has_part
-    }
-    datasets {
-        uuid        resource_id         PK
-        uuid        catalog_id
-        text        accrual_periodicity
-        timestamptz temporal_start
-        timestamptz temporal_end
-        float       spatial_resolution_m
-        text        temporal_resolution
-        text        version
-        text        version_notes
-        uuid        is_version_of       FK
-    }
-    distributions {
-        uuid    resource_id         PK
-        uuid    dataset_id          FK
-        text    access_url
-        text    download_url
-        text    media_type
-        text    format
-        bigint  byte_size
-        varchar checksum_algorithm
-        text    checksum_value
-        text    compress_format
-        text    package_format
-        text    availability
-        uuid    csvw_table_id       FK
-    }
-    data_services {
-        uuid     resource_id          PK
-        text     endpoint_url
-        text     endpoint_description
-        uuid_arr serves_dataset
-        text     protocol
-        text     security_schema_type
-    }
-    data_products {
-        uuid    resource_id             PK
-        varchar lifecycle_status
-        uuid    owner_id
-        text    purpose
-        varchar information_sensitivity
-        jsonb   has_policy
-    }
-    data_product_ports {
-        uuid        id              PK
-        uuid        data_product_id FK
-        varchar     port_type
-        uuid        data_service_id FK
-        uuid        dataset_id      FK
-        uuid        distribution_id FK
-        timestamptz created_at
-    }
-    catalog_records {
-        uuid        resource_id       PK
-        uuid        catalog_id
-        uuid        primary_topic_id
-        timestamptz listing_date
-        timestamptz modification_date
-        text        harvest_source
-    }
-    csvw_tables {
-        uuid        id              PK
-        uuid        distribution_id FK
-        text        url
-        text        title
-        text        description
-        jsonb       dialect
-        boolean     suppress_output
-        text        table_direction
-        timestamptz created_at
-        timestamptz updated_at
-    }
-    csvw_table_schemas {
-        uuid     id           PK
-        uuid     table_id     FK
-        text_arr primary_key
-        text     about_url
-        text     property_url
-        text     value_url
-    }
-    csvw_columns {
-        uuid    id                      PK
-        uuid    schema_id               FK
-        int     ordinal
-        text    name
-        text_arr titles
-        text    datatype
-        boolean required
-        boolean virtual
-        boolean suppress_output
-        text    lang
-        text    default_value
-        text    property_url
-        text    value_url
-        text    about_url
-        text    description
-        uuid    logical_data_element_id FK
-    }
-    vocabularies {
-        uuid        id              PK
-        text        name
-        text        prefix          UK
-        text        base_iri        UK
-        varchar     vocabulary_type
-        text        description
-        text        version
-        text        homepage
-        boolean     is_system
-        timestamptz created_at
-    }
-    dataset_vocabulary_profiles {
-        uuid        id            PK
-        uuid        dataset_id    FK
-        uuid        vocabulary_id FK
-        boolean     is_primary
-        text_arr    domain_tags
-        timestamptz created_at
-    }
-    logical_models {
-        uuid        id          PK
-        uuid        dataset_id  FK
-        text        name
-        text        description
-        text        version
-        varchar     status
-        timestamptz created_at
-        timestamptz updated_at
-    }
-    logical_data_elements {
-        uuid        id               PK
-        uuid        logical_model_id FK
-        text        name
-        text        label
-        text        description
-        text        logical_type
-        boolean     is_required
-        boolean     is_identifier
-        boolean     is_nullable
-        int         ordinal
-        timestamptz created_at
-        timestamptz updated_at
-    }
-    logical_element_vocab_mappings {
-        uuid        id                 PK
-        uuid        logical_element_id FK
-        uuid        vocabulary_id      FK
-        text        concept_iri
-        text        concept_label
-        text        concept_definition
-        varchar     match_type
-        timestamptz created_at
-    }
-    cross_model_mappings {
-        uuid        id           PK
-        varchar     source_type
-        uuid        source_id
-        varchar     target_type
-        uuid        target_id
-        text        mapping_type
-        timestamptz created_at
-    }
+                erDiagram
+                resources {
+                uuid id PK
+                varchar resource_type
+                text iri UK
+                uuid tenant_id
+                uuid domain_id
+                text title
+                text description
+                timestamptz issued
+                timestamptz modified
+                text_arr language
+                text_arr keywords
+                text_arr themes
+                text license
+                text rights_statement
+                text access_rights
+                text_arr conforms_to
+                uuid creator_id
+                uuid publisher_id
+                jsonb contact_points
+                text source_uri
+                jsonb extra
+                boolean is_deleted
+                timestamptz created_at
+                timestamptz updated_at
+                }
+                catalogs {
+                uuid resource_id PK
+                text homepage
+                uuid_arr has_part
+                }
+                datasets {
+                uuid resource_id PK
+                uuid catalog_id
+                text accrual_periodicity
+                timestamptz temporal_start
+                timestamptz temporal_end
+                float spatial_resolution_m
+                text temporal_resolution
+                text version
+                text version_notes
+                uuid is_version_of FK
+                }
+                distributions {
+                uuid resource_id PK
+                uuid dataset_id FK
+                text access_url
+                text download_url
+                text media_type
+                text format
+                bigint byte_size
+                varchar checksum_algorithm
+                text checksum_value
+                text compress_format
+                text package_format
+                text availability
+                uuid csvw_table_id FK
+                }
+                data_services {
+                uuid resource_id PK
+                text endpoint_url
+                text endpoint_description
+                uuid_arr serves_dataset
+                text protocol
+                text security_schema_type
+                }
+                data_products {
+                uuid resource_id PK
+                varchar lifecycle_status
+                uuid owner_id
+                text purpose
+                varchar information_sensitivity
+                jsonb has_policy
+                }
+                data_product_ports {
+                uuid id PK
+                uuid data_product_id FK
+                varchar port_type
+                uuid data_service_id FK
+                uuid dataset_id FK
+                uuid distribution_id FK
+                timestamptz created_at
+                }
+                catalog_records {
+                uuid resource_id PK
+                uuid catalog_id
+                uuid primary_topic_id
+                timestamptz listing_date
+                timestamptz modification_date
+                text harvest_source
+                }
+                csvw_tables {
+                uuid id PK
+                uuid distribution_id FK
+                text url
+                text title
+                text description
+                jsonb dialect
+                boolean suppress_output
+                text table_direction
+                timestamptz created_at
+                timestamptz updated_at
+                }
+                csvw_table_schemas {
+                uuid id PK
+                uuid table_id FK
+                text_arr primary_key
+                text about_url
+                text property_url
+                text value_url
+                }
+                csvw_columns {
+                uuid id PK
+                uuid schema_id FK
+                int ordinal
+                text name
+                text_arr titles
+                text datatype
+                boolean required
+                boolean virtual
+                boolean suppress_output
+                text lang
+                text default_value
+                text property_url
+                text value_url
+                text about_url
+                text description
+                uuid logical_data_element_id FK
+                }
+                vocabularies {
+                uuid id PK
+                text name
+                text prefix UK
+                text base_iri UK
+                varchar vocabulary_type
+                text description
+                text version
+                text homepage
+                boolean is_system
+                timestamptz created_at
+                }
+                dataset_vocabulary_profiles {
+                uuid id PK
+                uuid dataset_id FK
+                uuid vocabulary_id FK
+                boolean is_primary
+                text_arr domain_tags
+                timestamptz created_at
+                }
+                logical_models {
+                uuid id PK
+                uuid dataset_id FK
+                text name
+                text description
+                text version
+                varchar status
+                timestamptz created_at
+                timestamptz updated_at
+                }
+                logical_data_elements {
+                uuid id PK
+                uuid logical_model_id FK
+                text name
+                text label
+                text description
+                text logical_type
+                boolean is_required
+                boolean is_identifier
+                boolean is_nullable
+                int ordinal
+                timestamptz created_at
+                timestamptz updated_at
+                }
+                logical_element_vocab_mappings {
+                uuid id PK
+                uuid logical_element_id FK
+                uuid vocabulary_id FK
+                text concept_iri
+                text concept_label
+                text concept_definition
+                varchar match_type
+                timestamptz created_at
+                }
+                cross_model_mappings {
+                uuid id PK
+                varchar source_type
+                uuid source_id
+                varchar target_type
+                uuid target_id
+                text mapping_type
+                timestamptz created_at
+                }
 
-    resources      ||--o|  catalogs                     : "extends"
-    resources      ||--o|  datasets                     : "extends"
-    resources      ||--o|  distributions                : "extends"
-    resources      ||--o|  data_services                : "extends"
-    resources      ||--o|  data_products                : "extends"
-    resources      ||--o|  catalog_records              : "extends"
-    datasets       ||--o{  distributions                : "has"
-    datasets       o|--o|  datasets                     : "isVersionOf"
-    datasets       ||--o{  dataset_vocabulary_profiles  : "profiles"
-    datasets       ||--o{  logical_models               : "models"
-    distributions  o|--o|  csvw_tables                  : "describes"
-    csvw_tables    ||--o{  csvw_table_schemas            : "schema"
-    csvw_table_schemas ||--|{ csvw_columns              : "columns"
-    data_products  ||--o{  data_product_ports            : "ports"
-    data_product_ports o{--o| data_services             : "via"
-    data_product_ports o{--o| datasets                  : "via"
-    data_product_ports o{--o| distributions             : "via"
-    vocabularies   ||--o{  dataset_vocabulary_profiles   : "used in"
-    vocabularies   ||--o{  logical_element_vocab_mappings : "mapped by"
-    logical_models ||--|{  logical_data_elements         : "elements"
-    logical_data_elements ||--o{ csvw_columns           : "bound by"
-    logical_data_elements ||--o{ logical_element_vocab_mappings : "mappings"
+                resources ||--o| catalogs : "extends"
+                resources ||--o| datasets : "extends"
+                resources ||--o| distributions : "extends"
+                resources ||--o| data_services : "extends"
+                resources ||--o| data_products : "extends"
+                resources ||--o| catalog_records : "extends"
+                datasets ||--o{ distributions : "has"
+                datasets o|--o| datasets : "isVersionOf"
+                datasets ||--o{ dataset_vocabulary_profiles : "profiles"
+                datasets ||--o{ logical_models : "models"
+                distributions o|--o| csvw_tables : "describes"
+                csvw_tables ||--o{ csvw_table_schemas : "schema"
+                csvw_table_schemas ||--|{ csvw_columns : "columns"
+                data_products ||--o{ data_product_ports : "ports"
+                data_product_ports o{--o| data_services : "via"
+                data_product_ports o{--o| datasets : "via"
+                data_product_ports o{--o| distributions : "via"
+                vocabularies ||--o{ dataset_vocabulary_profiles : "used in"
+                vocabularies ||--o{ logical_element_vocab_mappings : "mapped by"
+                logical_models ||--|{ logical_data_elements : "elements"
+                logical_data_elements ||--o{ csvw_columns : "bound by"
+                logical_data_elements ||--o{ logical_element_vocab_mappings : "mappings"
               </div>
             </div>
           </div>
           <p class="erd-note">
-            <code>resources</code> is a polymorphic base table — every typed row shares its PK with a <code>resources</code> row.
-            <code>csvw_columns.logical_data_element_id</code> is nullable; set when a physical column is bound to a logical element.
+            <code>resources</code> is a polymorphic base table — every typed row shares its PK with a
+            <code>resources</code> row.
+            <code>csvw_columns.logical_data_element_id</code> is nullable; set when a physical column is bound to a
+            logical element.
           </p>
         </div>
 
@@ -2416,87 +2482,96 @@ erDiagram
             <div class="erd-toolbar">
               <span class="erd-db-label">harvest-service · PostgreSQL 16</span>
               <div class="erd-zoom-controls">
-                <button class="erd-zoom-btn" title="Zoom in"  onclick="erdZoom('hvt','in')">+</button>
-                <button class="erd-zoom-btn" title="Reset"    onclick="erdZoom('hvt','reset')">⊙</button>
+                <button class="erd-zoom-btn" title="Zoom in" onclick="erdZoom('hvt','in')">+</button>
+                <button class="erd-zoom-btn" title="Reset" onclick="erdZoom('hvt','reset')">⊙</button>
                 <button class="erd-zoom-btn" title="Zoom out" onclick="erdZoom('hvt','out')">−</button>
-                <button class="erd-zoom-btn erd-fs-btn" title="Full screen" onclick="erdFullscreen('hvt')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+                <button class="erd-zoom-btn erd-fs-btn" title="Full screen" onclick="erdFullscreen('hvt')"><svg
+                    width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round">
+                    <polyline points="15 3 21 3 21 9" />
+                    <polyline points="9 21 3 21 3 15" />
+                    <line x1="21" y1="3" x2="14" y2="10" />
+                    <line x1="3" y1="21" x2="10" y2="14" />
+                  </svg></button>
               </div>
             </div>
             <div class="erd-container" id="erd-container-hvt">
               <div class="mermaid" id="erd-src-hvt">
-erDiagram
-    harvest_sources {
-        uuid        id              PK
-        uuid        tenant_id
-        text        name
-        varchar     source_type
-        text        base_url
-        text        region
-        text        database_name
-        text_arr    schema_filter
-        text        credential_ref
-        jsonb       extra_config
-        timestamptz created_at
-        timestamptz updated_at
-    }
-    harvest_credentials {
-        uuid        id                PK
-        uuid        source_id         FK
-        varchar     credential_type
-        text        encrypted_payload
-        timestamptz created_at
-    }
-    harvest_jobs {
-        uuid        id              PK
-        uuid        source_id       FK
-        text        name
-        text        schedule_cron
-        boolean     full_refresh
-        boolean     enabled
-        timestamptz created_at
-        timestamptz updated_at
-    }
-    harvest_runs {
-        uuid        id                  PK
-        uuid        job_id              FK
-        uuid        source_id           FK
-        varchar     status
-        varchar     triggered_by
-        timestamptz started_at
-        timestamptz completed_at
-        int         entities_discovered
-        int         entities_created
-        int         entities_updated
-        int         entities_failed
-        text        snapshot_path
-        text        error_message
-        boolean     full_refresh
-        timestamptz created_at
-    }
-    harvest_run_items {
-        uuid        id                 PK
-        uuid        run_id             FK
-        varchar     entity_type
-        text        source_key
-        uuid        canonical_id
-        varchar     action
-        jsonb       raw_payload
-        jsonb       normalized_payload
-        text        error_detail
-        timestamptz created_at
-    }
+                erDiagram
+                harvest_sources {
+                uuid id PK
+                uuid tenant_id
+                text name
+                varchar source_type
+                text base_url
+                text region
+                text database_name
+                text_arr schema_filter
+                text credential_ref
+                jsonb extra_config
+                timestamptz created_at
+                timestamptz updated_at
+                }
+                harvest_credentials {
+                uuid id PK
+                uuid source_id FK
+                varchar credential_type
+                text encrypted_payload
+                timestamptz created_at
+                }
+                harvest_jobs {
+                uuid id PK
+                uuid source_id FK
+                text name
+                text schedule_cron
+                boolean full_refresh
+                boolean enabled
+                timestamptz created_at
+                timestamptz updated_at
+                }
+                harvest_runs {
+                uuid id PK
+                uuid job_id FK
+                uuid source_id FK
+                varchar status
+                varchar triggered_by
+                timestamptz started_at
+                timestamptz completed_at
+                int entities_discovered
+                int entities_created
+                int entities_updated
+                int entities_failed
+                text snapshot_path
+                text error_message
+                boolean full_refresh
+                timestamptz created_at
+                }
+                harvest_run_items {
+                uuid id PK
+                uuid run_id FK
+                varchar entity_type
+                text source_key
+                uuid canonical_id
+                varchar action
+                jsonb raw_payload
+                jsonb normalized_payload
+                text error_detail
+                timestamptz created_at
+                }
 
-    harvest_sources   ||--o{  harvest_credentials  : "credentials"
-    harvest_sources   ||--o{  harvest_jobs         : "jobs"
-    harvest_jobs      ||--o{  harvest_runs         : "runs"
-    harvest_sources   ||--o{  harvest_runs         : "runs"
-    harvest_runs      ||--o{  harvest_run_items    : "items"
+                harvest_sources ||--o{ harvest_credentials : "credentials"
+                harvest_sources ||--o{ harvest_jobs : "jobs"
+                harvest_jobs ||--o{ harvest_runs : "runs"
+                harvest_sources ||--o{ harvest_runs : "runs"
+                harvest_runs ||--o{ harvest_run_items : "items"
               </div>
             </div>
           </div>
           <p class="erd-note">
-            <code>harvest_credentials.encrypted_payload</code> stores AES-256-GCM ciphertext; plaintext never reaches the database.
-            <code>harvest_sources.source_type</code>: <code>dcat_http</code> | <code>aws_glue</code> | <code>snowflake</code> | <code>teradata</code>.
+            <code>harvest_credentials.encrypted_payload</code> stores AES-256-GCM ciphertext; plaintext never reaches
+            the database.
+            <code>harvest_sources.source_type</code>: <code>dcat_http</code> | <code>aws_glue</code> |
+            <code>snowflake</code> | <code>teradata</code>.
           </p>
         </div>
 
@@ -2506,71 +2581,79 @@ erDiagram
             <div class="erd-toolbar">
               <span class="erd-db-label">lineage-service · PostgreSQL 16 + Apache AGE</span>
               <div class="erd-zoom-controls">
-                <button class="erd-zoom-btn" title="Zoom in"  onclick="erdZoom('lin','in')">+</button>
-                <button class="erd-zoom-btn" title="Reset"    onclick="erdZoom('lin','reset')">⊙</button>
+                <button class="erd-zoom-btn" title="Zoom in" onclick="erdZoom('lin','in')">+</button>
+                <button class="erd-zoom-btn" title="Reset" onclick="erdZoom('lin','reset')">⊙</button>
                 <button class="erd-zoom-btn" title="Zoom out" onclick="erdZoom('lin','out')">−</button>
-                <button class="erd-zoom-btn erd-fs-btn" title="Full screen" onclick="erdFullscreen('lin')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+                <button class="erd-zoom-btn erd-fs-btn" title="Full screen" onclick="erdFullscreen('lin')"><svg
+                    width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round">
+                    <polyline points="15 3 21 3 21 9" />
+                    <polyline points="9 21 3 21 3 15" />
+                    <line x1="21" y1="3" x2="14" y2="10" />
+                    <line x1="3" y1="21" x2="10" y2="14" />
+                  </svg></button>
               </div>
             </div>
             <div class="erd-container" id="erd-container-lin">
               <div class="mermaid" id="erd-src-lin">
-erDiagram
-    lineage_jobs {
-        uuid    id            PK
-        text    namespace
-        text    name
-        jsonb   facets
-        bigint  age_vertex_id
-    }
-    lineage_datasets {
-        uuid    id                  PK
-        text    namespace
-        text    name
-        jsonb   facets
-        jsonb   schema_facet
-        uuid    catalog_resource_id
-        bigint  age_vertex_id
-    }
-    lineage_runs {
-        uuid        id                 PK
-        text        run_id             UK
-        uuid        job_id             FK
-        jsonb       facets
-        timestamptz nominal_start_time
-        timestamptz nominal_end_time
-    }
-    lineage_run_events {
-        uuid        id          PK
-        uuid        run_id      FK
-        varchar     event_type
-        timestamptz event_time
-        text        producer
-        text        schema_url
-        jsonb       inputs
-        jsonb       outputs
-        jsonb       raw_event
-        timestamptz created_at
-    }
-    column_lineage {
-        uuid    id                  PK
-        uuid    run_event_id        FK
-        uuid    output_dataset_id   FK
-        text    output_column
-        uuid    input_dataset_id    FK
-        text    input_column
-        text    transformation_type
-    }
+                erDiagram
+                lineage_jobs {
+                uuid id PK
+                text namespace
+                text name
+                jsonb facets
+                bigint age_vertex_id
+                }
+                lineage_datasets {
+                uuid id PK
+                text namespace
+                text name
+                jsonb facets
+                jsonb schema_facet
+                uuid catalog_resource_id
+                bigint age_vertex_id
+                }
+                lineage_runs {
+                uuid id PK
+                text run_id UK
+                uuid job_id FK
+                jsonb facets
+                timestamptz nominal_start_time
+                timestamptz nominal_end_time
+                }
+                lineage_run_events {
+                uuid id PK
+                uuid run_id FK
+                varchar event_type
+                timestamptz event_time
+                text producer
+                text schema_url
+                jsonb inputs
+                jsonb outputs
+                jsonb raw_event
+                timestamptz created_at
+                }
+                column_lineage {
+                uuid id PK
+                uuid run_event_id FK
+                uuid output_dataset_id FK
+                text output_column
+                uuid input_dataset_id FK
+                text input_column
+                text transformation_type
+                }
 
-    lineage_jobs       ||--o{  lineage_runs        : "runs"
-    lineage_runs       ||--o{  lineage_run_events  : "events"
-    lineage_run_events ||--o{  column_lineage      : "columns"
-    column_lineage     o{--o|  lineage_datasets    : "output dataset"
-    column_lineage     o{--o|  lineage_datasets    : "input dataset"
+                lineage_jobs ||--o{ lineage_runs : "runs"
+                lineage_runs ||--o{ lineage_run_events : "events"
+                lineage_run_events ||--o{ column_lineage : "columns"
+                column_lineage o{--o| lineage_datasets : "output dataset"
+                column_lineage o{--o| lineage_datasets : "input dataset"
               </div>
             </div>
           </div>
           <p class="erd-note">
-            Apache AGE graph <code>lineage_graph</code>: vertices <code>Job</code>, <code>Dataset</code>, <code>Column</code>;
+            Apache AGE graph <code>lineage_graph</code>: vertices <code>Job</code>, <code>Dataset</code>,
+            <code>Column</code>;
             edges <code>READ_BY</code>, <code>WRITES_TO</code>, <code>DERIVED_FROM</code>, <code>COLUMN_LINEAGE</code>.
             <code>age_vertex_id</code> links each relational row to its AGE vertex for Cypher traversal.
           </p>
@@ -2582,45 +2665,52 @@ erDiagram
             <div class="erd-toolbar">
               <span class="erd-db-label">ai-service · PostgreSQL 16 + pgvector</span>
               <div class="erd-zoom-controls">
-                <button class="erd-zoom-btn" title="Zoom in"  onclick="erdZoom('ai','in')">+</button>
-                <button class="erd-zoom-btn" title="Reset"    onclick="erdZoom('ai','reset')">⊙</button>
+                <button class="erd-zoom-btn" title="Zoom in" onclick="erdZoom('ai','in')">+</button>
+                <button class="erd-zoom-btn" title="Reset" onclick="erdZoom('ai','reset')">⊙</button>
                 <button class="erd-zoom-btn" title="Zoom out" onclick="erdZoom('ai','out')">−</button>
-                <button class="erd-zoom-btn erd-fs-btn" title="Full screen" onclick="erdFullscreen('ai')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+                <button class="erd-zoom-btn erd-fs-btn" title="Full screen" onclick="erdFullscreen('ai')"><svg
+                    width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round">
+                    <polyline points="15 3 21 3 21 9" />
+                    <polyline points="9 21 3 21 3 15" />
+                    <line x1="21" y1="3" x2="14" y2="10" />
+                    <line x1="3" y1="21" x2="10" y2="14" />
+                  </svg></button>
               </div>
             </div>
             <div class="erd-container" id="erd-container-ai">
               <div class="mermaid" id="erd-src-ai">
-erDiagram
-    conversations {
-        uuid        id          PK
-        uuid        tenant_id
-        uuid        user_id
-        text        title
-        timestamptz created_at
-    }
-    conversation_messages {
-        uuid        id              PK
-        uuid        conversation_id FK
-        varchar     role
-        text        content
-        int         token_count
-        text        model_used
-        timestamptz created_at
-    }
-    embedding_documents {
-        uuid        id          PK
-        uuid        tenant_id
-        varchar     entity_type
-        uuid        entity_id
-        int         chunk_index
-        text        content
-        vector768   embedding
-        text        model_name
-        jsonb       metadata
-        timestamptz created_at
-    }
+                erDiagram
+                conversations {
+                uuid id PK
+                uuid tenant_id
+                uuid user_id
+                text title
+                timestamptz created_at
+                }
+                conversation_messages {
+                uuid id PK
+                uuid conversation_id FK
+                varchar role
+                text content
+                int token_count
+                text model_used
+                timestamptz created_at
+                }
+                embedding_documents {
+                uuid id PK
+                uuid tenant_id
+                varchar entity_type
+                uuid entity_id
+                int chunk_index
+                text content
+                vector768 embedding
+                text model_name
+                jsonb metadata
+                timestamptz created_at
+                }
 
-    conversations ||--|{ conversation_messages : "messages"
+                conversations ||--|{ conversation_messages : "messages"
               </div>
             </div>
           </div>
@@ -2637,65 +2727,72 @@ erDiagram
             <div class="erd-toolbar">
               <span class="erd-db-label">identity-service · PostgreSQL 16</span>
               <div class="erd-zoom-controls">
-                <button class="erd-zoom-btn" title="Zoom in"  onclick="erdZoom('id','in')">+</button>
-                <button class="erd-zoom-btn" title="Reset"    onclick="erdZoom('id','reset')">⊙</button>
+                <button class="erd-zoom-btn" title="Zoom in" onclick="erdZoom('id','in')">+</button>
+                <button class="erd-zoom-btn" title="Reset" onclick="erdZoom('id','reset')">⊙</button>
                 <button class="erd-zoom-btn" title="Zoom out" onclick="erdZoom('id','out')">−</button>
-                <button class="erd-zoom-btn erd-fs-btn" title="Full screen" onclick="erdFullscreen('id')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+                <button class="erd-zoom-btn erd-fs-btn" title="Full screen" onclick="erdFullscreen('id')"><svg
+                    width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round">
+                    <polyline points="15 3 21 3 21 9" />
+                    <polyline points="9 21 3 21 3 15" />
+                    <line x1="21" y1="3" x2="14" y2="10" />
+                    <line x1="3" y1="21" x2="10" y2="14" />
+                  </svg></button>
               </div>
             </div>
             <div class="erd-container" id="erd-container-id">
               <div class="mermaid" id="erd-src-id">
-erDiagram
-    organizations {
-        uuid        id           PK
-        text        name         UK
-        text        display_name
-        text        description
-        varchar     plan
-        boolean     active
-        timestamptz created_at
-    }
-    domains {
-        uuid        id               PK
-        uuid        tenant_id
-        text        name
-        text        description
-        uuid        parent_domain_id FK
-        uuid        owner_id
-        timestamptz created_at
-        timestamptz updated_at
-    }
-    catalog_users {
-        uuid        id               PK
-        uuid        tenant_id
-        text        email            UK
-        text        first_name
-        text        last_name
-        text        keycloak_user_id UK
-        boolean     active
-        text_arr    roles
-        text_arr    permissions
-        timestamptz created_at
-        timestamptz updated_at
-    }
-    api_keys {
-        uuid        id           PK
-        uuid        tenant_id
-        uuid        owner_id
-        text        key_hash     UK
-        text        description
-        boolean     active
-        timestamptz expires_at
-        text_arr    scopes
-        timestamptz created_at
-        timestamptz last_used_at
-    }
+                erDiagram
+                organizations {
+                uuid id PK
+                text name UK
+                text display_name
+                text description
+                varchar plan
+                boolean active
+                timestamptz created_at
+                }
+                domains {
+                uuid id PK
+                uuid tenant_id
+                text name
+                text description
+                uuid parent_domain_id FK
+                uuid owner_id
+                timestamptz created_at
+                timestamptz updated_at
+                }
+                catalog_users {
+                uuid id PK
+                uuid tenant_id
+                text email UK
+                text first_name
+                text last_name
+                text keycloak_user_id UK
+                boolean active
+                text_arr roles
+                text_arr permissions
+                timestamptz created_at
+                timestamptz updated_at
+                }
+                api_keys {
+                uuid id PK
+                uuid tenant_id
+                uuid owner_id
+                text key_hash UK
+                text description
+                boolean active
+                timestamptz expires_at
+                text_arr scopes
+                timestamptz created_at
+                timestamptz last_used_at
+                }
 
-    organizations  ||--o{  domains       : "tenancy"
-    organizations  ||--o{  catalog_users : "members"
-    organizations  ||--o{  api_keys      : "keys"
-    domains        o|--o{  domains       : "parent"
-    catalog_users  ||--o{  api_keys      : "owns"
+                organizations ||--o{ domains : "tenancy"
+                organizations ||--o{ catalog_users : "members"
+                organizations ||--o{ api_keys : "keys"
+                domains o|--o{ domains : "parent"
+                catalog_users ||--o{ api_keys : "owns"
               </div>
             </div>
           </div>
@@ -2924,7 +3021,8 @@ curl -N -X POST http://localhost:8005/api/v1/conversations/$CONV/messages \
 
         <h2>Embedding pipeline</h2>
         <p>The ai-service listens on <code>inventory.datasets.changes</code> and
-          <code>inventory.data-products.changes</code>. On each event it fetches the enriched entity from inventory-service,
+          <code>inventory.data-products.changes</code>. On each event it fetches the enriched entity from
+          inventory-service,
           chunks the text (title + description + element names + vocabulary labels), embeds the chunks using the
           configured model, and upserts into the pgvector store.
         </p>
@@ -3746,7 +3844,7 @@ docker compose up -d inventory-service</code></pre>
           s.ty += e.touches[0].clientY - lastTouches[0].clientY;
           applyTransform(key);
         } else if (e.touches.length === 2 && lastTouches?.length === 2) {
-          const d  = t => Math.hypot(t[1].clientX - t[0].clientX, t[1].clientY - t[0].clientY);
+          const d = t => Math.hypot(t[1].clientX - t[0].clientX, t[1].clientY - t[0].clientY);
           const mx = (e.touches[0].clientX + e.touches[1].clientX) / 2;
           const my = (e.touches[0].clientY + e.touches[1].clientY) / 2;
           const rect = container.getBoundingClientRect();
@@ -3763,13 +3861,13 @@ docker compose up -d inventory-service</code></pre>
       }, { passive: false });
     }
 
-    window.erdZoom = function(key, action) {
+    window.erdZoom = function (key, action) {
       const s = pzState[key];
       if (!s) return;
       const container = document.getElementById('erd-container-' + key);
       const cw = container.clientWidth, ch = container.clientHeight;
-      if (action === 'in')    { s.scale = clamp(s.scale * 1.25, 0.15, 8); }
-      if (action === 'out')   { s.scale = clamp(s.scale / 1.25, 0.15, 8); }
+      if (action === 'in') { s.scale = clamp(s.scale * 1.25, 0.15, 8); }
+      if (action === 'out') { s.scale = clamp(s.scale / 1.25, 0.15, 8); }
       if (action === 'reset') {
         const svg = s.svg;
         const sw = svg.viewBox.baseVal.width || svg.clientWidth;
@@ -3780,7 +3878,7 @@ docker compose up -d inventory-service</code></pre>
       applyTransform(key);
     };
 
-    window.switchErd = function(key) {
+    window.switchErd = function (key) {
       document.querySelectorAll('.erd-tab').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.erd-panel').forEach(p => p.classList.remove('active'));
       document.querySelector(`.erd-tab[onclick="switchErd('${key}')"]`).classList.add('active');
@@ -3792,7 +3890,7 @@ docker compose up -d inventory-service</code></pre>
     const erdKeys = ['inv', 'hvt', 'lin', 'ai', 'id'];
     let erdsRendered = false;
 
-    window.initErds = async function() {
+    window.initErds = async function () {
       if (erdsRendered) { requestAnimationFrame(() => initPanZoom('inv')); return; }
       erdsRendered = true;
 
@@ -3811,7 +3909,7 @@ docker compose up -d inventory-service</code></pre>
     };
 
     let topoRendered = false;
-    window.initTopo = async function() {
+    window.initTopo = async function () {
       if (topoRendered) { requestAnimationFrame(() => initPanZoom('topo')); return; }
       topoRendered = true;
       await mermaid.run({ querySelector: '#mermaid-src-topo' });
@@ -3819,7 +3917,7 @@ docker compose up -d inventory-service</code></pre>
     };
 
     let metaRendered = false;
-    window.initMeta = async function() {
+    window.initMeta = async function () {
       if (metaRendered) { requestAnimationFrame(() => initPanZoom('meta')); return; }
       metaRendered = true;
       await mermaid.run({ querySelector: '#mermaid-src-meta' });
@@ -3859,7 +3957,7 @@ docker compose up -d inventory-service</code></pre>
     fsBackdrop.addEventListener('click', exitErdFS);
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && curFSKey) exitErdFS(); });
 
-    window.erdFullscreen = function(key) {
+    window.erdFullscreen = function (key) {
       if (curFSKey === key) { exitErdFS(); return; }
       if (curFSKey) exitErdFS();
       const wrapper = document.getElementById('erd-wrapper-' + key);

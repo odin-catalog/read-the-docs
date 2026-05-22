@@ -90,7 +90,7 @@ Get a full ODIN stack running locally in under five minutes using Docker Compose
 **1. Clone and configure**
 
 ```bash
-git clone https://github.com/odin-catalog/odin.git
+git clone https://github.com/ODIN-Data-Intelligence/odin.git
 cd odin
 cp .env.example .env          # review and edit credentials
 ```
